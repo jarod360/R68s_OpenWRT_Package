@@ -26,6 +26,16 @@ rm -rf feeds/passwall/luci-app-passwall
 rm -rf feeds/passwall_packages/v2ray-plugin
 rm -rf feeds/passwall_packages/sing-box
 
+# Git稀疏克隆，只克隆指定目录到本地
+function git_sparse_clone() {
+  branch="$1" repourl="$2" && shift 2
+  git clone --depth=1 -b $branch --single-branch --filter=blob:none --sparse $repourl
+  repodir=$(echo $repourl | awk -F '/' '{print $(NF)}')
+  cd $repodir && git sparse-checkout set $@
+  mv -f $@ ../package
+  cd .. && rm -rf $repodir
+}
+
 #添加额外插件
 git clone --depth=1 https://github.com/jarod360/openwrt_ttyd package/openwrt_ttyd
 git clone --depth=1 https://github.com/jarod360/openwrt_msd_lite package/openwrt_msd_lite
@@ -33,6 +43,7 @@ git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpu
 git clone --depth=1 https://github.com/jarod360/luci-app-xupnpd package/luci-app-xupnpd
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 git_sparse_clone master https://github.com/coolsnowwolf/packages multimedia/xupnpd
+git_sparse_clone master https://github.com/kenzok8/openwrt-packages luci-app-fileassistant
 git_sparse_clone master https://github.com/kenzok8/small chinadns-ng
 git_sparse_clone main https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
 
