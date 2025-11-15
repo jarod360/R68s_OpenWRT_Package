@@ -19,12 +19,7 @@ rm -rf feeds/packages/libs/libwebsockets
 rm -rf feeds/packages/utils/ttyd
 rm -rf feeds/packages/net/msd_lite
 rm -rf feeds/packages/multimedia/xupnpd
-rm -rf feeds/small/chinadns-ng
-rm -rf feeds/kenzo/luci-app-wechatpush
-rm -rf feeds/kenzo/luci-app-alist
-rm -rf feeds/passwall/luci-app-passwall
-rm -rf feeds/passwall_packages/v2ray-plugin
-rm -rf feeds/passwall_packages/sing-box
+rm -rf feeds/luci/applications/luci-app-passwall
 
 # Git稀疏克隆，只克隆指定目录到本地
 function git_sparse_clone() {
@@ -62,7 +57,7 @@ sed -i 's/"网络存储"/"存储"/g' `grep "网络存储" -rl ./`
 # sed -i 's/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/root::0:0:99999:7:::/g' package/lean/default-settings/files/zzz-default-settings
 
 #　编译的固件文件名添加日期
-sed -i 's/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)/IMG_PREFIX:=R68S-$(shell TZ=UTC-8 date "+%Y%m%d")-$(VERSION_DIST_SANITIZED)/g' include/image.mk
+# sed -i 's/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)/IMG_PREFIX:=R68S-$(shell TZ=UTC-8 date "+%Y%m%d")-$(VERSION_DIST_SANITIZED)/g' include/image.mk
 
 # Modify default IP
 sed -i 's/192.168.0.254/10.0.0.1/g' package/base-files/files/bin/config_generate
