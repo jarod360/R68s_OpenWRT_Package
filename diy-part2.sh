@@ -49,20 +49,20 @@ git_sparse_clone main https://github.com/xiaorouji/openwrt-passwall luci-app-pas
 
 # 修改版本为编译日期
 date_version=$(date +"%y.%m.%d")
-orig_version=$(cat "package/addition/default-settings/files/99-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
-sed -i "s/${orig_version}/R${date_version} by Jarod/g" package/addition/default-settings/files/99-default-settings
+orig_version=$(cat "package/lean/default-settings/files/zzz-default-settings" | grep DISTRIB_REVISION= | awk -F "'" '{print $2}')
+sed -i "s/${orig_version}/R${date_version} by Jarod/g" package/lean/default-settings/files/zzz-default-settings
 
 # 修改本地时间格式
-sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/addition/autocore/files/*/index.htm
+sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/files/*/index.htm
 
 # 修改插件名字
 sed -i 's/"网络存储"/"存储"/g' `grep "网络存储" -rl ./`
 
 #　web登陆密码从password修改为空
-# sed -i 's/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/root::0:0:99999:7:::/g' package/extra/default-settings/files/99-default-settings
+# sed -i 's/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/root::0:0:99999:7:::/g' package/lean/default-settings/files/zzz-default-settings
 
 #　编译的固件文件名添加日期
-sed -i 's/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)/IMG_PREFIX:=360V6-$(shell TZ=UTC-8 date "+%Y%m%d")-$(VERSION_DIST_SANITIZED)/g' include/image.mk
+sed -i 's/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)/IMG_PREFIX:=R68S-$(shell TZ=UTC-8 date "+%Y%m%d")-$(VERSION_DIST_SANITIZED)/g' include/image.mk
 
 # Modify default IP
 sed -i 's/192.168.0.254/10.0.0.1/g' package/base-files/files/bin/config_generate
