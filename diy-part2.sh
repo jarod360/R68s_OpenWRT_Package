@@ -37,13 +37,13 @@ function git_sparse_clone() {
 git clone --depth=1 https://github.com/jarod360/openwrt_ttyd package/openwrt_ttyd
 git clone --depth=1 https://github.com/jarod360/openwrt_msd_lite package/openwrt_msd_lite
 git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush.git package/luci-app-serverchan
-git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
+# git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
 # git clone --depth=1 https://github.com/jarod360/luci-app-xupnpd package/luci-app-xupnpd
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
-git_sparse_clone master https://github.com/coolsnowwolf/packages multimedia/xupnpd
-git_sparse_clone master https://github.com/kenzok8/openwrt-packages luci-app-fileassistant
-git_sparse_clone master https://github.com/kenzok8/small chinadns-ng
-git_sparse_clone main https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
+# git_sparse_clone master https://github.com/coolsnowwolf/packages multimedia/xupnpd
+# git_sparse_clone master https://github.com/kenzok8/openwrt-packages luci-app-fileassistant
+# git_sparse_clone master https://github.com/kenzok8/small chinadns-ng
+# git_sparse_clone main https://github.com/xiaorouji/openwrt-passwall luci-app-passwall
 
 # 修改版本为编译日期
 date_version=$(date +"%y.%m.%d")
@@ -57,7 +57,7 @@ sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/lean/autocore/fil
 sed -i 's/"网络存储"/"存储"/g' `grep "网络存储" -rl ./`
 
 #　web登陆密码从password修改为空
-# sed -i 's/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/root::0:0:99999:7:::/g' package/lean/default-settings/files/zzz-default-settings
+sed -i 's/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/root::0:0:99999:7:::/g' package/lean/default-settings/files/zzz-default-settings
 
 #　编译的固件文件名添加日期
 # sed -i 's/IMG_PREFIX:=$(VERSION_DIST_SANITIZED)/IMG_PREFIX:=R68S-$(shell TZ=UTC-8 date "+%Y%m%d")-$(VERSION_DIST_SANITIZED)/g' include/image.mk
