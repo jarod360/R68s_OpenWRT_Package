@@ -18,8 +18,10 @@ rm -rf feeds/luci/themes/luci-theme-argon
 rm -rf feeds/packages/libs/libwebsockets
 rm -rf feeds/packages/utils/ttyd
 rm -rf feeds/packages/net/msd_lite
-rm -rf feeds/packages/multimedia/xupnpd
+# rm -rf feeds/packages/multimedia/xupnpd
 rm -rf feeds/luci/applications/luci-app-passwall
+rm -rf feeds/luci/applications/luci-app-lucky
+rm -rf feeds/packages/net/chinadns-ng
 
 # Git稀疏克隆，只克隆指定目录到本地
 function git_sparse_clone() {
@@ -35,7 +37,8 @@ function git_sparse_clone() {
 git clone --depth=1 https://github.com/jarod360/openwrt_ttyd package/openwrt_ttyd
 git clone --depth=1 https://github.com/jarod360/openwrt_msd_lite package/openwrt_msd_lite
 git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush.git package/luci-app-serverchan
-git clone --depth=1 https://github.com/jarod360/luci-app-xupnpd package/luci-app-xupnpd
+git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
+# git clone --depth=1 https://github.com/jarod360/luci-app-xupnpd package/luci-app-xupnpd
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 git_sparse_clone master https://github.com/coolsnowwolf/packages multimedia/xupnpd
 git_sparse_clone master https://github.com/kenzok8/openwrt-packages luci-app-fileassistant
